@@ -5,11 +5,41 @@ description = ""
 authors = ["Illia Troshchynskyi <illia.troshchynskyi@nixs.com>"]
 readme = "README.md"
 
+[tool.poetry.dev-dependencies]
+ruff = "^0.4.10"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 sqlalchemy = "^2.0.31"
 psycopg = "^3.1.19"
 
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+exclude = [".venv"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = [
+    "E", # Errors
+    "F", # Pyflakes
+    "I", # isort
+    "T20", # flake8-print
+]
+ignore = ["T201"]
+pydocstyle.convention = 'google'
+
+[tool.ruff.lint.isort]
+known-local-folder = ["tests", "app", "scripts"]
+split-on-trailing-comma = true
+combine-as-imports = true
+case-sensitive = false
+detect-same-package = true
+order-by-type = false  # Sorting of all imported objects (functions, classes, etc.) regardless of their type
+force-sort-within-sections = true  #
 
 [build-system]
 requires = ["poetry-core"]
