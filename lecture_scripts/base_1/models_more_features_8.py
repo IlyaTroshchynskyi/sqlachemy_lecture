@@ -9,9 +9,6 @@ class Base(DeclarativeBase):
     pass
 
 
-# сделать константы
-
-
 class Workload(enum.StrEnum):
     part_time = 'part_time'
     full_time = 'full_time'
@@ -26,7 +23,7 @@ class ResumeModel(Base):
     )
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    title: Mapped[str | None] = mapped_column(String(256))
+    title: Mapped[str | None] = mapped_column(String(256), index=True)
     compensation: Mapped[int] = mapped_column(Integer, default=0)
     old_compensation: Mapped[int | None] = mapped_column(Integer, server_default='100')
     workload: Mapped[Workload]

@@ -11,7 +11,7 @@ def select_workers_with_selectin_relationship():
     Here we will have two queiries. First will load all workers another one will load all resumes of workers
     :return:
     """
-    query = select(WorkerModel).options(selectinload(WorkerModel.resumes))
+    query = select(WorkerModel).options(selectinload(WorkerModel.resumes)).filter()
 
     with session_factory() as session:
         result = session.execute(query).scalars().all()

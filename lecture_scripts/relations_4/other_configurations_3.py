@@ -15,7 +15,7 @@ class WorkerModel(Base):
 
     resumes_part_time: Mapped[list['ResumeModel']] = relationship(
         # backref - creates a relationship implicitly, i.e. it is not necessary to register it in the second table.
-        # backref='',
+        # backref='worker',
         back_populates='worker',
         primaryjoin="and_(WorkerModel.id == ResumeModel.worker_id, ResumeModel.workload == 'part_time')",
         order_by='ResumesOrm.id.desc()',

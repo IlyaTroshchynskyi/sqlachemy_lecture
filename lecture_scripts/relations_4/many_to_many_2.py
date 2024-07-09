@@ -33,14 +33,12 @@ class VacanciesModel(Base):
 
 class VacanciesRepliesModel(Base):
     __tablename__ = 'vacancies_replies'
-
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
     resume_id: Mapped[int] = mapped_column(
         ForeignKey('resumes.id', ondelete='CASCADE'),
-        primary_key=True,
     )
     vacancy_id: Mapped[int] = mapped_column(
         ForeignKey('vacancies.id', ondelete='CASCADE'),
-        primary_key=True,
     )
 
     cover_letter: Mapped[str | None]

@@ -12,7 +12,7 @@ def select_workers_with_joined_relationship():
     has prop innerjoin=True
     :return:
     """
-    query = select(WorkerModel).options(joinedload(WorkerModel.resumes))
+    query = select(WorkerModel).options(joinedload(WorkerModel.resumes, innerjoin=True))
 
     with session_factory() as session:
         workers = session.execute(query).unique().scalars().all()

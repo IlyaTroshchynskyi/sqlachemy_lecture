@@ -1,4 +1,4 @@
-from sqlalchemy import and_, DECIMAL, func, select
+from sqlalchemy import DECIMAL, func, select
 
 from lecture_scripts.fill_db import fill_db
 from lecture_scripts.models import create_table, ResumeModel, session_factory
@@ -15,7 +15,9 @@ def select_resumes_avg_compensation(like_language: str = 'Python'):
     query = (
         select(ResumeModel.workload, func.avg(ResumeModel.compensation).cast(DECIMAL(10, 2)).label('avg_compensation'))
         .select_from(ResumeModel)
-        .filter(and_(ResumeModel.title.contains(like_language), ResumeModel.compensation > 40000))
+        .filter(ResumeModel.compensation > 40000)
+        .filter(ResumeModel.title.contains(like_language))
+        # .filter(and_(ResumeModel.title.contains(like_language), ResumeModel.compensation > 40000))
         .group_by(ResumeModel.workload)
         .having(func.avg(ResumeModel.compensation) > 70000)
     )

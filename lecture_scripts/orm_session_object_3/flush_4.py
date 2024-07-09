@@ -18,7 +18,7 @@ def create_worker_auto_flush():
         session.flush()
         print(worker_jack.id, 'after flush')
 
-        session.commit()
+        # session.commit()
 
 
 if __name__ == '__main__':
